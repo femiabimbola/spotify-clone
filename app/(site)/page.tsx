@@ -1,8 +1,7 @@
-import Image from 'next/image'
 
 export default function Home() {
   return (
-    <main className="">
+    <main className="text-green-500">
       The Home Page
     </main>
   )
