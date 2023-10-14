@@ -5,6 +5,8 @@ import { useMemo } from "react"
 import {HiHome} from 'react-icons/hi'
 import {BiSearch} from 'react-icons/bi'
 import Box from "@/components/Box"
+import SidebarItem from "@/components/SidebarItem"
+import Libary from "@/components/Library"
 
 interface SiderbarProps {
   children: React.ReactNode
@@ -16,6 +18,7 @@ const Sidebar = ({children} : SiderbarProps ) => {
 
   const pathname = usePathname()
   // pathname is active when they are not on search
+
   const routes = useMemo(() => [
     {
       icon: HiHome,
@@ -35,9 +38,20 @@ const Sidebar = ({children} : SiderbarProps ) => {
     <div className="flex h-full"> 
      <div className="hidden md:flex flex-col gap-y-2 bg-black h-full w-[300px] p-2">
       <Box>
-        {children}
+        <div className="flex flex-col gap-y-4 px-5 py-4">
+          {routes.map((route) => (
+            <SidebarItem key={route.label} {...route}/>
+          ))
+          }
+        </div>
+      </Box>
+      <Box className="overflow-y-auto h-full">
+        <Libary />
       </Box>
      </div>
+     <main className="h-full flex-1 overflow-y-auto py-2">
+      {children}
+     </main>
     </div>
   )
 }
