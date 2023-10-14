@@ -5,6 +5,7 @@ import { twMerge } from "tailwind-merge";
 import {RxCaretLeft, RxCaretRight} from "react-icons/rx"
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
+import Button from "@/components/Button";
 
 
 interface HeaderProps {
@@ -15,6 +16,7 @@ interface HeaderProps {
 
 const Header:React.FC<HeaderProps> = ({ children, className}) => {
   const router = useRouter()
+
   const handleLogout = () => {
     // handle the logout
   }
@@ -42,10 +44,27 @@ const Header:React.FC<HeaderProps> = ({ children, className}) => {
             <BiSearch className="text-black" size={20}/>
           </button>
         </div>
-        <div>
-          
+        {/* End of mobile vuew */}
+        <div className="flex justify-between items-center gap-x-4" >
+          <>
+          <div>
+            <Button className="bg-transparent text-neutral-300 font-medium"
+            onClick={() => {}}
+            >
+              Sign Up
+            </Button>
+          </div>
+          <div>
+            <Button className="bg-white px-6 py-2"
+            onClick={() => {}}
+            >
+              Log In
+            </Button>
+          </div>
+          </>
         </div>
       </div>
+      {children}
     </div>
   )
 }
