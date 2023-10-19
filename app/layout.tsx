@@ -1,30 +1,31 @@
-import Sidebar from '@/components/Sidebar'
-import './globals.css'
-import type { Metadata } from 'next'
-import { Figtree } from 'next/font/google'
-import SupabaseProvider from '@/providers/SupabaseProvider'
+import Sidebar from "@/components/Sidebar";
+import "./globals.css";
+import type { Metadata } from "next";
+import { Figtree } from "next/font/google";
+import SupabaseProvider from "@/providers/SupabaseProvider";
+import UserProvider from "@/hooks/userProvider";
 
-const font = Figtree({ subsets: ['latin'] })
+const font = Figtree({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Tush Music App',
-  description: 'A clone for spotify',
-}
+  title: "Tush Music App",
+  description: "A clone for spotify",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className={font.className}>
         <SupabaseProvider>
-          <Sidebar>
-            {children}
-          </Sidebar>
+          <UserProvider>
+            <Sidebar>{children}</Sidebar>
+          </UserProvider>
         </SupabaseProvider>
       </body>
     </html>
-  )
+  );
 }
