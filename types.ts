@@ -32,6 +32,7 @@ export interface Price {
 	trial_period_days?: number | null;
 	metadata?: Stripe.Metadata
 	products?: Product
+}
 
 export interface Subscription {
 	id:string;
@@ -39,7 +40,7 @@ export interface Subscription {
 	status?: Stripe.Subscription.Status;
 	metadata?: Stripe.Metadata;
 	price_id?:string;
-	quantity?: string;
+	quantity?: number;
 	cancel_at_period_end?:boolean;
 	created: string;
 	current_periid_start:string;
