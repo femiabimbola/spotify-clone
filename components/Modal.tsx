@@ -10,6 +10,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
+// <Dialog.Root open={isOpen} defaultOpen={isOpen} onOpenChange={onChange}>
 const Modal = ({
   isOpen,
   title,
@@ -18,7 +19,7 @@ const Modal = ({
   children,
 }: ModalProps) => {
   return (
-    <Dialog.Root open={isOpen} defaultOpen={isOpen} onOpenChange={onChange}>
+    <Dialog.Root open={isOpen} onOpenChange={onChange} defaultOpen>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-neutral-900/90 backdrop-blur-sm fixed inset-0" />
         <Dialog.Content
