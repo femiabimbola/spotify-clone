@@ -11,3 +11,5 @@
 - Create a Hook function for the opening and closing of the form
 - Create the modal, change the properties of the function
 - Create the provider to be able to call it at any component
+
+### Using React Hook form
