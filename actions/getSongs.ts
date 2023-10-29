@@ -2,8 +2,9 @@ import { Song } from "@/types";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
-
+// <Promise<Song[]> Means it is a promise and it is an array of songs
 const getSong = async():Promise<Song[]> =>{
+
   const supabase = createServerComponentClient({
     cookies: cookies,
   });
