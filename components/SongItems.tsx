@@ -3,6 +3,7 @@
 import useLoadImage from "@/hooks/useLoadImage";
 import {Song} from "@/types";
 import Image from "next/image";
+import PlayButton from "@/components/PlayButton";
 
 interface SongItemProps {
   data: Song;
@@ -30,7 +31,9 @@ const SongItem = ({data, onClick}: SongItemProps) => {
           by {data.author}
         </p>
       </div>
-      <div className="absolute bottom-24 right-5 "> Play button</div>
+      <div className="absolute bottom-24 right-5 ">
+        <PlayButton />
+      </div>
     </div>
   );
 };

@@ -1,9 +1,9 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { useMemo } from "react";
-import { HiHome } from "react-icons/hi";
-import { BiSearch } from "react-icons/bi";
+import {usePathname} from "next/navigation";
+import {useMemo} from "react";
+import {HiHome} from "react-icons/hi";
+import {BiSearch} from "react-icons/bi";
 import Box from "@/components/Box";
 import SidebarItem from "@/components/SidebarItem";
 import Libary from "@/components/Library";
@@ -12,7 +12,7 @@ interface SiderbarProps {
   children: React.ReactNode;
 }
 
-const Sidebar = ({ children }: SiderbarProps) => {
+const Sidebar = ({children}: SiderbarProps) => {
   // What does pathname do???
   //  What does useMemo do
   // pathname is active when they are not on search
@@ -39,14 +39,11 @@ const Sidebar = ({ children }: SiderbarProps) => {
 
   return (
     <div className="flex h-full">
-      <div className="hidden md:flex flex-col gap-y-2 bg-black h-full w-[300px] p-2">
+      <div className="hidden md:flex flex-col gap-y-2 bg-black h-full w-[350px] p-2">
         <Box>
           <div className="flex flex-col gap-y-4 px-5 py-4">
             {routes.map((route) => (
-              <SidebarItem
-                key={route.label}
-                {...route}
-              />
+              <SidebarItem key={route.label} {...route} />
             ))}
           </div>
         </Box>
