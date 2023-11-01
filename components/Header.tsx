@@ -66,6 +66,7 @@ const Header: React.FC<HeaderProps> = ({children, className}) => {
           </button>
         </div>
         {/* End of mobile vuew */}
+
         <div className="flex justify-between items-center gap-x-4">
           {user ? (
             <div className="flex gap-x-4 items-center">
