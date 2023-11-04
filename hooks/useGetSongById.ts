@@ -1,7 +1,9 @@
 import { Song } from '@/types';
 import { useSessionContext } from '@supabase/auth-helpers-react';
-import {useEffect, useState} from 'react'
+import {useEffect, useMemo, useState} from 'react'
 import toast from 'react-hot-toast';
+
+// useSessionContext has authenicate
 
 const useGetSongById = (id?:string) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -25,8 +27,10 @@ const useGetSongById = (id?:string) => {
     fetchSong();
   }, [id, supabaseClient])
 
+  return useMemo(() => ({
+    isLoading, song
+  }), [isLoading, song])
 
-  
-}
+};
 
 export default useGetSongById;
