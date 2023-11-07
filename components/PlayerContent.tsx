@@ -1,7 +1,8 @@
 "use client";
 
 import {Song} from "@/types";
-import {useState} from "react";
+import useSound from "use-sound";
+import {useEffect, useState} from "react";
 import MediaItem from "@/components/MediaItem";
 import LikedButton from "./LikedButton";
 import {BsPauseFill, BsPlayFill} from "react-icons/bs";
@@ -36,6 +37,43 @@ const PlayerContent = ({song, songUrl}: PlayerContentProps) => {
     if (!previousSong) return player.setId(player.ids[player.ids.length - 1]);
     player.setId(previousSong);
   };
+
+  // The key in the prop destroys the interface
+  const [play, {pause, sound}] = useSound(songUrl, {
+    volume: volume,
+    onplay: () => setIsPlaying(true),
+    onend: () => {
+      setIsPlaying(false);
+      onPlayNext();
+    },
+    onpause: () => setIsPlaying(false),
+    format: ["mp3"],
+  });
+
+  // Play sound when it automatically loads
+  useEffect(() => {
+    sound?.play();
+    return () => {
+      sound?.unload();
+    };
+  }, [sound]);
+
+  const handlePlay = () => {
+    if (!isPlaying) {
+      play();
+    } else {
+      pause();
+    }
+  };
+
+  const toggleMute = () => {
+    if (volume === 0) {
+      setVolume(1);
+    } else {
+      setVolume(0);
+    }
+  };
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 h-full">
       <div className=" flex w-full justify-start">
@@ -46,7 +84,10 @@ const PlayerContent = ({song, songUrl}: PlayerContentProps) => {
       </div>
       {/* Mobile view */}
       <div className="flex md:hidden col-auto w-full justify-end items-center">
-        <div className="h-10 w-10 flex items-center justify-center rounded-full bg-white p-1 cursor-pointer">
+        <div
+          className="h-10 w-10 flex items-center justify-center rounded-full bg-white p-1 cursor-pointer"
+          onClick={handlePlay}
+        >
           <Icon size={30} className={"text-black"} />
         </div>
       </div>
@@ -59,7 +100,7 @@ const PlayerContent = ({song, songUrl}: PlayerContentProps) => {
         />
         <div
           className="flex items-center justify-center h-10 w-10 rounded-full bg-white p-1 cursor-pointer"
-          onClick={() => {}}
+          onClick={handlePlay}
         >
           <Icon className="text-black" size={30} />
         </div>
@@ -71,8 +112,12 @@ const PlayerContent = ({song, songUrl}: PlayerContentProps) => {
       </div>
       <div className="hidden md:flex w-full justify-end pr-2">
         <div className="flex items-center gap-x-2 w-[120px]">
-          <VolumeIcon onClick={() => {}} className="cursor-pointer" size={34} />
-          <Slider />
+          <VolumeIcon
+            onClick={toggleMute}
+            className="cursor-pointer"
+            size={34}
+          />
+          <Slider value={volume} onChange={(value) => setVolume(value)} />
         </div>
       </div>
     </div>

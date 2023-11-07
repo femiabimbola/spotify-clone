@@ -1,5 +1,6 @@
 "use client";
 
+// This is what divided the dashboard
 import {usePathname} from "next/navigation";
 import {useMemo} from "react";
 import {HiHome} from "react-icons/hi";
@@ -8,6 +9,7 @@ import Box from "@/components/Box";
 import SidebarItem from "@/components/SidebarItem";
 import Libary from "@/components/Library";
 import {Song} from "@/types";
+import usePlayer from "@/hooks/usePlayer";
 
 interface SiderbarProps {
   children: React.ReactNode;
@@ -20,6 +22,7 @@ const Sidebar = ({children, songs}: SiderbarProps) => {
   // pathname is active when they are not on search
 
   const pathname = usePathname();
+  const player = usePlayer();
 
   const routes = useMemo(
     () => [
